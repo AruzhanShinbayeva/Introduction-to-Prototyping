@@ -1,0 +1,82 @@
+<mujoco model="task1">
+    <visual>
+        <headlight ambient="0.5 0.5 0.5" />
+    </visual>
+
+    <option gravity="0 0 -9.81" />
+
+    <worldbody>
+        <light name="overhead" pos="0 0 1"/>
+        <geom type="plane" pos="-0.5 -0.5 0" size="1 1 0.1" rgba="0 .9 0 1"/>
+        <body name="base_section" euler="0 0 0">
+            <geom name="lower_part" type="box" pos="0 0 0.1" size=".1 .05 .1" rgba="0.2 0.2 0.2 1"/>
+            <geom name="ball_joint" pos="0 0 .2" size=".01" rgba="0.2 0.2 0.2 1"/>
+            <geom name="upper_section" type="box" pos="0 0 .27" size=".07 .05 .07" rgba="0.2 0.2 0.2 0.7"/>
+        </body>
+        <body name="actuator1" euler="0 0 0">
+            <geom type="cylinder" fromto="0.1105 -.08 0.2 0.0875 -.08 0.2" size=".018" mass="0.065" rgba=".1 .1 .1 .8"/>
+            <joint name="pivot_1" pos="0.099 -.08 0.2" axis="1 0 0" range="-3.14 3.14"/>
+            <body name="actuator2" euler="0 0 0">
+                <geom type="cylinder" fromto="0.135 -.08 0.1885 0.135 -.08 0.2115" size=".018" mass="0.065" rgba=".1 .1 .1 .8"/>
+                <joint name="pivot_2" pos="0.135 -.08 0.2" axis="0 0 1" range="-3.14 3.14"/>
+                <body name="actuator3" euler="0 0 0">
+                    <geom type="cylinder" fromto="0.135 -.0555 0.2 0.135 -.0325 0.2" size=".018" mass="0.065" rgba=".1 .1 .1 .8"/>
+                    <joint name="pivot_3" pos="0.135 -.0440 0.2" axis="0 1 0" range="-3.14 3.14"/>
+                    <body name="link_1" euler="0 0 0">
+                        <geom name="connector1" type="box" pos="0.135 .0175 0.2" size=".005 .05 .005" mass="0.02" rgba="0.2 0.5 0.2 1"/>
+                        <body name="joint1" euler="0 0 0">
+                            <geom type="cylinder" fromto="0.1235 0.0855 0.2 0.1465 0.0855 0.2" size=".018" mass="0.065" rgba=".1 .1 .1 .8"/>
+                            <joint name="pivot_4" pos="0.135 0.0855 0.2" axis="1 0 0" range="-3.14 3.14"/>
+                            <body name="link_2" euler="0 0 0">
+                                <geom name="connector2" type="box" pos="0.135 0.1535 0.2" size=".005 .05 .005" mass="0.02" rgba="0.2 0.2 0.5 1"/>
+                                <body name="end_mass" euler="0 0 0">
+                                    <geom name="mass_block" pos="0.135 0.2235 0.2" size=".02" mass="0.05" rgba="0.5 0.2 0.2 1"/>
+                                </body>
+                            </body>
+                        </body>
+                    </body>
+                </body>
+            </body>
+        </body>
+    </worldbody>
+
+    <contact>
+        <exclude body1="world" body2="base_section"/>
+        <exclude body1="world" body2="actuator1"/>
+        <exclude body1="world" body2="actuator2"/>
+        <exclude body1="world" body2="actuator3"/>
+        <exclude body1="world" body2="link_1"/>
+        <exclude body1="world" body2="joint1"/>
+        <exclude body1="world" body2="link_2"/>
+        <exclude body1="world" body2="end_mass"/>
+        <exclude body1="base_section" body2="actuator1"/>
+        <exclude body1="base_section" body2="actuator2"/>
+        <exclude body1="base_section" body2="actuator3"/>
+        <exclude body1="base_section" body2="link_1"/>
+        <exclude body1="base_section" body2="joint1"/>
+        <exclude body1="base_section" body2="link_2"/>
+        <exclude body1="base_section" body2="end_mass"/>
+        <exclude body1="actuator1" body2="actuator2"/>
+        <exclude body1="actuator1" body2="actuator3"/>
+        <exclude body1="actuator1" body2="link_1"/>
+        <exclude body1="actuator1" body2="joint1"/>
+        <exclude body1="actuator1" body2="link_2"/>
+        <exclude body1="actuator1" body2="end_mass"/>
+        <exclude body1="actuator2" body2="actuator3"/>
+        <exclude body1="actuator2" body2="link_1"/>
+        <exclude body1="actuator2" body2="joint1"/>
+        <exclude body1="actuator2" body2="link_2"/>
+        <exclude body1="actuator2" body2="end_mass"/>
+        <exclude body1="actuator3" body2="link_1"/>
+        <exclude body1="actuator3" body2="joint1"/>
+        <exclude body1="actuator3" body2="link_2"/>
+        <exclude body1="actuator3" body2="end_mass"/>
+        <exclude body1="link_1" body2="joint1"/>
+        <exclude body1="link_1" body2="link_2"/>
+        <exclude body1="link_1" body2="end_mass"/>
+        <exclude body1="joint1" body2="link_2"/>
+        <exclude body1="joint1" body2="end_mass"/>
+        <exclude body1="link_2" body2="end_mass"/>
+    </contact>
+
+</mujoco>
